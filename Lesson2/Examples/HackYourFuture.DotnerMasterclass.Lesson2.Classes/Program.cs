@@ -1,4 +1,7 @@
-﻿// Create an object and set properties
+﻿// Namespaces reference classes from other places
+using HackYourFuture.DotnetMasterclass.Lesson2.SharedClasses;
+
+// Create an object and set properties
 Person stijn = new Person();
 stijn.Name = "Stijn";
 stijn.Age = 25;
@@ -38,6 +41,17 @@ student.Print();
 // But this works:
 Mammal dog = new Dog();
 
+// Use a class from another assembly
+// this works because of the 'using' at the top.
+var myBoat = new Vehicle("My boat");
+var boatName = myBoat.Name;
+// Not accessible because it is protected
+//myBoat.SetNewVehicleName("The new awesome name");
+
+// but we can also use the full name instead
+var myFerrari = new HackYourFuture.DotnetMasterclass.Lesson2.SharedClasses.Vehicle();
+
+Console.WriteLine(myBoat);
 // Convention: classes uppercase
 class Person
 {
@@ -98,7 +112,8 @@ class Student : Person
 }
 
 // Always needs to be inherited from, can never be instantiated
-abstract class Mammal
+// internal: can be used inside the ame assembly
+internal abstract class Mammal
 {
     // This MUST be implemented by inheriting classes, because of 'abstract'
     public abstract void Move();
