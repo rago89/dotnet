@@ -43,7 +43,8 @@ namespace HackYourFuture.DotnetMasterclass.Lesson3.Generics
             GenericMethodExecutor.Execute();
             Console.ReadLine();
 
-
+            var myTest = new Exercise1<int, int>();
+            myTest.Print(10, 20);
         }
     }
 
