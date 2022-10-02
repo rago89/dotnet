@@ -6,19 +6,19 @@ Create 3 controllers named as follow:<br/>
 2. VehicleController
 3. FactoryController
 
-They all have an action which returns a string containing the name of the controller.
+They all have an action which returns a string containing the name of the controller.<br/>
 All the actions are of the HTTP action type GET.
 
 ## Exercise 2
 Add an action in the user controller where you need to give a number, which represents 'age'.<br/>
 If it is lower than a 18, return a bad request response then.<br/>
 Otherwise return a ok response.<br/>
-Do the same thing for vehicle controller, but when it is lower than 4, then you need to return a bad request response.
+Do the same thing for vehicle controller, but when it is lower than 4, then you need to return a bad request response.<br/>
 Both actions are of the HTTP action type POST.
 
 ## Exercise 3
 Create an action in the user controller which requests a name from the body.<br/>
-The action is of the Http action type POST.
+The action is of the Http action type POST.<br/>
 Create also an action in the factory controller which requests a name from the route.<br/>
 The action is of the Http action type Get.
 
@@ -30,7 +30,7 @@ Try to create a model which represent a user with the following properties:<br/>
 - Gender: enumeration
 
 Add an action in the user controller which requests the user model.<br/>
-The response of the action is of the type string which tells the info of the user like "Hello my name is ... and I'm from ... ".
+The response of the action is of the type string which tells the info of the user like "Hello my name is ... and I'm from ... ".<br/>
 The action has the HTTP action type POST.
 
 ## Exercise 5
@@ -64,7 +64,7 @@ Call this model 'VehicleDto'.
 ### Part 4
 Create 4 actions:
 1. An action which gets a vehicle from the list.<br/>
-   The request is a string with the license plate.
+   The request is a string with the license plate.<br/>
    The response is the found vehicle.
 2. An action which puts a vehicle in the list.
    The request is a vehicle DTO.<br/>
