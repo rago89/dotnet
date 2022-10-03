@@ -51,7 +51,14 @@ namespace SolutionsLesson4.Controllers
         [Route("[action]")]
         public IActionResult GetUserFromList(string name)
         {
-            var userFound = _users.FirstOrDefault(x => x.Name == name);
+            User userFound = null;
+            foreach (var user in _users)
+            {
+                if (user.Name == name)
+                {
+                    userFound = user;
+                }
+            }
             if (userFound == null)
                 return NotFound($"No user found with name {name}");
             return Ok(userFound);

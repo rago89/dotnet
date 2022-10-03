@@ -36,7 +36,16 @@ namespace SolutionsLesson4.Controllers
         [Route("[action]")]
         public IActionResult GetVehicleFromList(string licensePlate)
         {
-            var foundVehicle = _vehicles.FirstOrDefault(x => x.LicensePlate == licensePlate);
+            Vehicle foundVehicle = null;
+
+            foreach (var vehicle in _vehicles)
+            {
+                if (vehicle.LicensePlate == licensePlate)
+                {
+                    foundVehicle = vehicle;
+                }
+            }
+
             if (foundVehicle == null)
                 return NotFound($"No vehicle found with license plate {licensePlate}");
 
@@ -54,7 +63,16 @@ namespace SolutionsLesson4.Controllers
         [Route("[action]")]
         public IActionResult AddUserToVehicleInList(string licensePlate, User user)
         {
-            var foundVehicle = _vehicles.FirstOrDefault(x => x.LicensePlate == licensePlate);
+            Vehicle foundVehicle = null;
+
+            foreach (var vehicle in _vehicles)
+            {
+                if (vehicle.LicensePlate == licensePlate)
+                {
+                    foundVehicle = vehicle;
+                }
+            }
+
             if (foundVehicle == null)
                 return NotFound($"No vehicle found with license plate {licensePlate}");
             foundVehicle.Owner = user;
