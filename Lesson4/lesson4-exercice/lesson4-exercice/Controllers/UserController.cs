@@ -3,10 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using lesson4_exercice.Models;
 using lesson4_exercice.Dto;
 using Newtonsoft.Json.Linq;
+using lesson4_exercice.Exceptions;
 
 namespace lesson4_exercice.Controllers
 {
-
+    [TypeFilter(typeof(UserExceptionFilter))]
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class UserController : ControllerBase
@@ -17,14 +18,6 @@ namespace lesson4_exercice.Controllers
         {
             _db = db;
         }
-
-        /*
-        [HttpGet]
-        public IActionResult GetUser()
-        {
-            return Ok("Hello from user controller");
-        }
-        */
 
         [HttpPost]
         public IActionResult SetAge(int age)
@@ -51,17 +44,16 @@ namespace lesson4_exercice.Controllers
         [HttpPost]
         public IActionResult CreateUser(User user)
         {
-            if (ModelState.IsValid) 
+            if (ModelState.IsValid)
             {
 
-            if (user.Age < 1 || user.Age > 120) return BadRequest("Age out of range");
-            User newUser = new(user.Name, user.Age, user.Address, user.Gender, user.Email, user.Password);
+                User newUser = new(user.Name, user.Age, user.Address, user.Gender, user.Email, user.Password);
 
-            _db.Users.Add(newUser);
+                _db.Users.Add(newUser);
 
-            UserDto userDto = new(newUser.Id, newUser.Name, newUser.Age, newUser.Address, newUser.Gender);
+                UserDto userDto = new(newUser.Id, newUser.Name, newUser.Age, newUser.Address, newUser.Gender);
 
-            string userFormatted = $@"
+                string userFormatted = $@"
                             id: {userDto.Id},
                             name: {userDto.Name},
                             age: {userDto.Age},
@@ -69,7 +61,7 @@ namespace lesson4_exercice.Controllers
                             gender: {userDto.Gender} 
                             ";
 
-            return Ok(userFormatted);
+                return Ok(userFormatted);
             }
 
             return BadRequest("Invalid input values");

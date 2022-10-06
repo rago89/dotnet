@@ -12,8 +12,6 @@ namespace lesson4_exercice.Controllers
     public class VehicleController : ControllerBase
     {
         private DBVehicle _db;
-        private int _;
-
         public VehicleController(DBVehicle db)
         {
             _db = db;
@@ -25,21 +23,21 @@ namespace lesson4_exercice.Controllers
             if (ModelState.IsValid && vehicle.Owner is not null)
             {
                 if (vehicle.Owner.Age < 18)
-            {
-                BadRequest($"Owner age is under 18 age: {vehicle.Owner.Age}");
-            }
+                {
+                    BadRequest($"Owner age is under 18 age: {vehicle.Owner.Age}");
+                }
 
-            if (vehicle.Licence == 0)
-            {
-                BadRequest($"License is not valid license: {vehicle.Licence}");
-            }
+                if (vehicle.Licence == 0)
+                {
+                    BadRequest($"License is not valid license: {vehicle.Licence}");
+                }
 
-            Vehicle newVehicle = new(vehicle.Licence, vehicle.Model, vehicle.Owner);
-            _db.Vehicles.Add(newVehicle);
+                Vehicle newVehicle = new(vehicle.Licence, vehicle.Model, vehicle.Owner);
+                _db.Vehicles.Add(newVehicle);
 
-            VehicleDto vehicleDto = new(newVehicle.Id, newVehicle.Licence, newVehicle.Model);
+                VehicleDto vehicleDto = new(newVehicle.Id, newVehicle.Licence, newVehicle.Model);
 
-            return Ok($"Vehicle with id:{vehicleDto.Id} model: {vehicleDto.Model} and license: {vehicleDto.Licence} was added");
+                return Ok($"Vehicle with id:{vehicleDto.Id} model: {vehicleDto.Model} and license: {vehicleDto.Licence} was added");
             }
 
             return BadRequest("Invalid input values");
@@ -54,13 +52,13 @@ namespace lesson4_exercice.Controllers
         }
 
         [HttpGet]
-        [Route(template:"{id}")]
+        [Route(template: "{id}")]
         public IActionResult GetVehicle(string id)
         {
             var vehicleFound = _db.Vehicles.FirstOrDefault(vehicle => vehicle.Id == id);
-            if (vehicleFound != null) 
+            if (vehicleFound != null)
             {
-                return Ok(new VehicleDto(vehicleFound.Id,vehicleFound.Licence, vehicleFound.Model));
+                return Ok(new VehicleDto(vehicleFound.Id, vehicleFound.Licence, vehicleFound.Model));
             }
             return NotFound($"Vehicle with the given id: {id} not found");
         }
