@@ -1,8 +1,8 @@
 ﻿namespace lesson4_exercice.Models
 {
-    public class DB
+    public class DBUser
     {
-        public DB()
+        public DBUser()
         {
             Users = new List<User>();
         }
