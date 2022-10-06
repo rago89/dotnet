@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using lesson4_exercice.Models;
 using lesson4_exercice.Dto;
+using Newtonsoft.Json.Linq;
 
 namespace lesson4_exercice.Controllers
 {
@@ -10,9 +11,9 @@ namespace lesson4_exercice.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private DB _db;
+        private DBUser _db;
 
-        public UserController(DB db)
+        public UserController(DBUser db)
         {
             _db = db;
         }
@@ -50,8 +51,10 @@ namespace lesson4_exercice.Controllers
         [HttpPost]
         public IActionResult CreateUser(User user)
         {
-            if (user.Age < 1 || user.Age > 120) return BadRequest("Age out of range");
+            if (ModelState.IsValid) 
+            {
 
+            if (user.Age < 1 || user.Age > 120) return BadRequest("Age out of range");
             User newUser = new(user.Name, user.Age, user.Address, user.Gender, user.Email, user.Password);
 
             _db.Users.Add(newUser);
@@ -67,6 +70,9 @@ namespace lesson4_exercice.Controllers
                             ";
 
             return Ok(userFormatted);
+            }
+
+            return BadRequest("Invalid input values");
         }
 
         [HttpGet]
@@ -86,7 +92,7 @@ namespace lesson4_exercice.Controllers
 
             foreach (User user in _db.Users)
             {
-                if (user.Id == id)
+                if (!(user == null) && user.Id == id)
                 {
                     var u = new UserDto(user.Id, user.Name, user.Age, user.Address, user.Gender);
 
