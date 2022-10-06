@@ -24,8 +24,8 @@
         }
 
         public string Id { get => _id; }
-        public string Email { get => _email; set => _email = value; }
-        public string Password { get => _password; set => _password = value; }
+        public string Email { get => _email; set => _email = IsValidStringInput(value) ? value : String.Empty; }
+        public string Password { get => _password; set => _password = IsValidStringInput(value) ? value : String.Empty; }
 
         public string Name
         {
@@ -36,7 +36,7 @@
         public int Age
         {
             get => _age;
-            set => _age = (value < 1 || value > 120) ? 0 : value;
+            set => _age = (value < 1 || value > 120) ? throw new ArgumentOutOfRangeException($"Age must be between 1 and 120 age: '{_age}'") : value;
         }
 
         public string Address
@@ -53,7 +53,7 @@
         }
         private static bool IsValidStringInput(string? value)
         {
-            if (String.IsNullOrEmpty(value)) return false;
+            if (String.IsNullOrEmpty(value)) throw new ArgumentException($"Name cannot be null or empty string  value: {value}"); ;
             return true;
         }
     }
