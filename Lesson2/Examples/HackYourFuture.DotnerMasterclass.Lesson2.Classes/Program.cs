@@ -1,4 +1,6 @@
-﻿// Namespaces reference classes from other places
+﻿
+
+// Namespaces reference classes from other places
 using HackYourFuture.DotnetMasterclass.Lesson2.SharedClasses;
 
 // Create an object and set properties

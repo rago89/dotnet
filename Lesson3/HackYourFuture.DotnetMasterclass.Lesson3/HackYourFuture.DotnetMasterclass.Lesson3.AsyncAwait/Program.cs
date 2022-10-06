@@ -4,15 +4,20 @@
     {
         static async Task Main(string[] args)
         {
+            var pokemonData = await Exercise1.GetPokemon();
+            System.Console.WriteLine(pokemonData);
             Console.WriteLine(await GetPokemonDitto());
             Console.ReadLine();
 
 
             // Wait for multiple tasks
-            var result = await Task.WhenAll(GetPokemonDitto(), GetPokemonCharmander());
-            Console.WriteLine(result[0]);
-            Console.WriteLine(result[1]);
-            Console.ReadLine();
+            //   var result = await Task.WhenAll(GetPokemonDitto(), GetPokemonCharmander());
+            //   Console.WriteLine(result[0]);
+            //   Console.WriteLine(result[1]);
+            //   Console.ReadLine();
+
+
+
         }
 
         private static async Task<string> GetPokemonDitto()
