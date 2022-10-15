@@ -20,6 +20,16 @@ namespace lesson4_exercice.Exceptions
                 // Don't display exception details unless running in Development.
                 return;
             }
+            /*
+            if (context.ModelState.IsValid == false)
+            {
+                context.Result = new ContentResult
+                {
+                    Content = context.ModelState.ToString(),
+                    StatusCode = StatusCodes.Status400BadRequest
+                };
+            }
+            */
 
             if (context.Exception is ArgumentOutOfRangeException)
             {
